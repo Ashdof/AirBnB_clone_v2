@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """This module defines a class to manage file storage for hbnb clone"""
 import json
+import shlex
 
 
 class FileStorage:
@@ -8,9 +9,34 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
-    def all(self):
-        """Returns a dictionary of models currently in storage"""
-        return FileStorage.__objects
+    def all(self, cls=None):
+        """Get list of objects
+
+        Description:
+        This method fetches a list of objects of a type of class
+        from the file storage
+
+        Args:
+        cls (class): the class of objects to fetch
+
+        Returns:
+        A dictionary of objects of the provided type of class
+        """
+
+        obj_dict = {}
+
+        if cls:
+            objs = self.__objects
+
+            for key in objs:
+                split = key.replace('.', ' ')
+                split = shlex.split(split)
+
+                if split[0] == cls.__name__:
+                    obj_dict[key] = self.__objects[key]
+            return obj_dict
+        else:
+            return self.__objects
 
     def new(self, obj):
         """Adds new object to storage dictionary"""
@@ -45,6 +71,17 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r') as f:
                 temp = json.load(f)
                 for key, val in temp.items():
-                        self.all()[key] = classes[val['__class__']](**val)
+                    self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
+
+    def delete(self, obj=None):
+        """Delete an object
+
+        Args:
+        obj (object): the object to delete
+        """
+
+        if obj:
+            key = f'{type(obj).__name__}.{obj.id}'
+            del self.__objects[key]
