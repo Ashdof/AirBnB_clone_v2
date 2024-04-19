@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """ Place Module for HBNB project """
 from os import getenv
+import shlex
 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship
