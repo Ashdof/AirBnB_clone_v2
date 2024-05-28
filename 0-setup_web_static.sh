@@ -12,10 +12,12 @@ reset='\033[0m'
 
 echo -e "${blue}Updating and doing some minor checks...${reset}\n"
 
+# update system
+sudo apt-get update -y -qq
+
 # install nginx if not present
 if [ ! -x /usr/sbin/nginx ]; then
-	sudo apt-get update -y -qq && \
-	     sudo apt-get install -y nginx
+	sudo apt-get install -y nginx
 fi
 
 echo -e "\n${blue}Setting up some minor stuff.${reset}\n"
