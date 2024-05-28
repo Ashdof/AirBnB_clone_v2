@@ -12,7 +12,7 @@ $nginx_conf = "server {
         index index.html index.htm;
     }
     location /redirect_me {
-        return 301 https://th3-gr00t.tk;
+        return 301 https://enchill.tech;
     }
     error_page 404 /404.html;
     location /404 {
@@ -48,7 +48,7 @@ file { '/data/web_static/shared':
 
 file { '/data/web_static/releases/test/index.html':
   ensure  => 'present',
-  content => "Holberton School Puppet\n"
+  content => "Holberton School\n"
 } ->
 
 file { '/data/web_static/current':
@@ -70,7 +70,7 @@ file { '/var/www/html':
 
 file { '/var/www/html/index.html':
   ensure  => 'present',
-  content => "Holberton School Nginx\n"
+  content => "Holberton School\n"
 } ->
 
 file { '/var/www/html/404.html':
