@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """ Review module for the HBNB project """
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, ForignKey, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Float
 
 from models.base_model import BaseModel, Base
 

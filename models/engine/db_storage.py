@@ -34,7 +34,7 @@ class DBStorage:
         db = getenv("HBNB_MYSQL_DB")
         env = getenv("HBNB_ENV")
 
-        con = f"mysql+mysqldb://{user}:{passwd}@{host}/{db}"
+        con = f"mysql+pymysql://{user}:{passwd}@{host}/{db}"
         self.__engine = create_engine(con, pool_pre_ping=True)
 
         if env == "test":
@@ -120,6 +120,10 @@ class DBStorage:
         self.__session = Session()
 
     def close(self):
-        """Close the session"""
+        """Close the session
 
-        self.__session.close()
+        Description:
+        This method calls the remove() method on the private session attribute
+        """
+
+        self.__session.remove()
