@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+emacs web_flask/"$1"
